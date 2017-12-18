@@ -8,7 +8,7 @@
         </div>
         <div class="input-field col s6">
           <select name="courseLanguage" id="ddlLanguage">
-            <option v-for="opt in languages" :value="1" :key="opt.id">{{opt.value.name}}</option>
+            <option v-for="opt in languages" :value="opt.id" :key="opt.id">{{opt.value.name}}</option>
           </select>
           <label for="txtLanguage">Language</label>
         </div>

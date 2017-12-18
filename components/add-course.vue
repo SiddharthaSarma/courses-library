@@ -3,39 +3,42 @@
     <form class="col s12">
       <div class="row">
         <div class="input-field col s6">
-          <input id="first_name" type="text" class="validate">
-          <label for="first_name">First Name</label>
+          <input id="courseName" type="text" class="validate">
+          <label for="courseName">Course Name</label>
         </div>
         <div class="input-field col s6">
-          <input id="last_name" type="text" class="validate">
-          <label for="last_name">Last Name</label>
+          <select name="" id="">
+            <option v-for="opt in languages" :value="1" :key="opt.id">{{opt.value.name}}</option>
+          </select>
+          <label for="txtLanguage">Language</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input value="I am not editable" id="disabled" type="text" class="validate">
-          <label for="disabled">Disabled</label>
+          <input id="txtAutorName" type="text" class="validate">
+          <label for="txtAutorName">Author Name</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input id="password" type="password" class="validate">
-          <label for="password">Password</label>
+          <input id="txtCourseLink" type="text" class="validate">
+          <label for="txtCourseLink">Course Link</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input id="email" type="email" class="validate">
-          <label for="email">Email</label>
+          <input id="txtImageLink" type="text" class="validate">
+          <label for="txtImageLink">Image Link</label>
         </div>
       </div>
       <div class="row">
-        <div class="col s12">
-          This is an inline input field:
-          <div class="input-field inline">
-            <input id="email" type="email" class="validate">
-            <label for="email" data-error="wrong" data-success="right">Email</label>
-          </div>
+        <div class="input-field col s6">
+          <input id="courseName" type="text" class="validate">
+          <label for="courseName">Course Name</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="txtPublishedDate" type="text">
+          <label for="txtPublishedDate">Published Date</label>
         </div>
       </div>
     </form>
@@ -43,11 +46,38 @@
 </template>
 
 <script>
-export default {
-
+import Vue from 'vue';
+import { Component } from 'vue-property-decorator';
+import db from '../firebaseinit';
+@Component({})
+export default class AddCourse extends Vue {
+  languages = [];
+  created() {
+    db
+      .collection('languages')
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          this.languages.push({
+            id: doc.id,
+            value: doc.data()
+          });
+        });
+        setTimeout(function() {
+          $('select').material_select();
+        });
+        
+      });
+  }
+  mounted() {
+    $('#txtPublishedDate').pickadate({
+      selectMonths: true, // Creates a dropdown to control month
+      selectYears: 15, // Creates a dropdown of 15 years to control year,
+      today: 'Today',
+      clear: 'Clear',
+      close: 'Ok',
+      closeOnSelect: false // Close upon selecting a date,
+    });
+  }
 }
 </script>
-
-<style>
-
-</style>

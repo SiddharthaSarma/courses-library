@@ -1,8 +1,8 @@
 export default {
-  apiKey: 'AIzaSyDAAxzTG9w90GJKTqHYlD0K1Oy3zcXVb-o',
-  authDomain: 'learning-library-7daa6.firebaseapp.com',
-  databaseURL: 'https://learning-library-7daa6.firebaseio.com',
-  projectId: 'learning-library-7daa6',
-  storageBucket: 'learning-library-7daa6.appspot.com',
-  messagingSenderId: '215703678634'
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  databaseURL: process.env.DATABASE_URL,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDER_ID
 };

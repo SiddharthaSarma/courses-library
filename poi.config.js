@@ -8,7 +8,6 @@ if (fs.existsSync(envFile)) {
   const envConfig = dotenv.parse(fs.readFileSync(envFile));
 
   for (var k in envConfig) {
-    console.log(k);
     process.env[k] = envConfig[k];
   }
 }

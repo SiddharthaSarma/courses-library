@@ -1,21 +1,16 @@
 <template>
   <v-container fluid grid-list-md>
     <v-layout row wrap>
-      <v-flex
-        xs12 sm6 md3
-        v-for="n in 16"
-        :key="n"
-      >
+      <v-flex xs12 sm6 md3 v-for="course in list" :key="course.id">
         <v-card flat tile>
-          <v-card-media
-            :src="list[0].imageLink"
-            height="150px"
-          >
+          <v-card-media :src="course.imageLink" height="150px">
           </v-card-media>
           <v-card-title primary-title>
             <div>
-              <h3 class="headline mb-0"><a :href="list[0].courseLink">{{list[0].name}}</a></h3>
-              <div>{{list[0].description}}</div>
+              <h6 class="headline mb-0">
+                <a :href="course.link" target="_blank">{{course.name}}</a>
+              </h6>
+              <div class="course-description">{{course.description}}</div>
             </div>
           </v-card-title>
           <v-card-actions>
@@ -49,5 +44,8 @@ export default class List extends Vue {
 </script>
 
 <style>
-
+.course-description {
+  max-height: 150px;
+  overflow: hidden;
+}
 </style>

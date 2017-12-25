@@ -1,58 +1,35 @@
 <template>
-  <v-form v-model="valid" ref="form" lazy-validation>
-    <v-text-field
-      label="Course Name"
-      v-model="courseName"
-    ></v-text-field>
-    <v-text-field
-      label="Description"
-      v-model="courseDescription"
-    ></v-text-field>
-    <v-select
-      label="Language"
-      v-model="select"
-      :items="languages"
-      item-text="value"
-      single-line
-      item-value="id"
-      return-object
-    ></v-select>
-      <v-dialog
-        persistent
-        v-model="modal"
-        lazy
-        full-width
-        width="290px"
-      >
-        <v-text-field
-          slot="activator"
-          label="Picker in dialog"
-          v-model="date"
-          prepend-icon="event"
-          readonly
-        ></v-text-field>
-        <v-date-picker v-model="date" scrollable actions>
-          <template slot-scope="{ save, cancel }">
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn flat color="primary" @click="cancel">Cancel</v-btn>
-              <v-btn flat color="primary" @click="save">OK</v-btn>
-            </v-card-actions>
-          </template>
-        </v-date-picker>
-      </v-dialog>
-    <v-btn
-      @click="submit"
-      :disabled="!valid"
-    >
+  <v-form ref="form">
+    <v-text-field label="Course Name" v-model="courseName"></v-text-field>
+    <v-text-field label="Description" v-model="courseDescription"></v-text-field>
+    <v-text-field label="Author" v-model="courseAuthor"></v-text-field>
+    <v-text-field label="Course Link" v-model="courseLink"></v-text-field>
+    <v-text-field label="Image Link" v-model="imageLink"></v-text-field>
+    <v-select label="Publisher" v-model="coursePublisher" :items="publishers" item-text="value" single-line item-value="id" return-object></v-select>
+    <v-select label="Language" v-model="courseLanguage" :items="languages" item-text="value" single-line item-value="id" return-object></v-select>
+    <v-dialog persistent v-model="modal" lazy full-width width="290px">
+      <v-text-field slot="activator" label="Released on" v-model="publishedDate" prepend-icon="event" readonly></v-text-field>
+      <v-date-picker v-model="publishedDate" scrollable actions>
+        <template slot-scope="{ save, cancel }">
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn flat color="primary" @click="cancel">Cancel</v-btn>
+            <v-btn flat color="primary" @click="save">OK</v-btn>
+          </v-card-actions>
+        </template>
+      </v-date-picker>
+    </v-dialog>
+    <v-btn @click="submit">
       submit
     </v-btn>
     <v-btn @click="clear">clear</v-btn>
+    <v-snackbar :timeout="5000" :top="true" :right="true" :color="'success'" v-model="snackbar">
+      Course created successfully
+    </v-snackbar>
   </v-form>
 </template>
 
 <script>
-
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import db from '../firebaseinit';
@@ -61,16 +38,25 @@ import db from '../firebaseinit';
 export default class AddCourse extends Vue {
   languages = [];
   publishers = [];
+  courseLink = '';
   courseName = '';
-  date = null;
+  courseAuthor = '';
+  imageLink = '';
+  courseDescription = '';
+  courseLanguage = null;
+  coursePublisher = null;
+  publishedDate = null;
+  courseLanguage = null;
   menu = false;
   modal = false;
+  snackbar = false;
 
   created() {
     this.fetchLanguages();
     this.fetchPublishers();
   }
 
+  // Fetch languages
   fetchLanguages() {
     db
       .collection('languages')
@@ -82,16 +68,37 @@ export default class AddCourse extends Vue {
             value: doc.data().name
           });
         });
-        setTimeout(function() {
-          $('select').material_select();
-        });
       });
   }
   // Need to save details in firebase.
-  submitForm() {
-    console.log(this.courseName, this.courseAuthor, this.courseLink, this.imageLink, this.coursePublisher, this.publishedDate);
+  submit() {
+    db
+      .collection('courses')
+      .add({
+        name: this.courseName,
+        released_year: this.publishedDate,
+        imageLink: this.imageLink,
+        link: this.courseLink,
+        description: this.courseDescription,
+        author_name: this.courseAuthor,
+        language: this.courseLanguage.id,
+        publisher: this.coursePublisher.id
+      })
+      .then(() => {
+        this.snackbar = true;
+        this.clear();
+      })
+      .catch(function(error) {
+        console.error('Error writing document: ', error);
+      });
   }
 
+  // Clear form
+  clear() {
+    this.$refs.form.reset();
+  }
+
+  // Fetch publishers
   fetchPublishers() {
     db
       .collection('publisher')
@@ -100,24 +107,10 @@ export default class AddCourse extends Vue {
         querySnapshot.forEach(doc => {
           this.publishers.push({
             id: doc.id,
-            value: doc.data()
+            value: doc.data().name
           });
         });
-        setTimeout(function() {
-          $('select').material_select();
-        });
       });
-  }
-  
-  mounted() {
-    $('#txtPublishedDate').pickadate({
-      selectMonths: true, // Creates a dropdown to control month
-      selectYears: 15, // Creates a dropdown of 15 years to control year,
-      today: 'Today',
-      clear: 'Clear',
-      close: 'Ok',
-      closeOnSelect: false // Close upon selecting a date,
-    });
   }
 }
 </script>

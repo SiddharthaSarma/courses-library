@@ -1,5 +1,5 @@
 <template>
-  <v-form v-model="valid" ref="form" lazy-validation>
+  <v-form>
     <v-text-field
       label="Course Name"
       v-model="courseName"
@@ -17,13 +17,13 @@
       item-value="id"
       return-object
     ></v-select>
-      <v-dialog
-        persistent
-        v-model="modal"
-        lazy
-        full-width
-        width="290px"
-      >
+    <v-dialog
+      persistent
+      v-model="modal"
+      lazy
+      full-width
+      width="290px"
+    >
         <v-text-field
           slot="activator"
           label="Picker in dialog"
@@ -82,9 +82,6 @@ export default class AddCourse extends Vue {
             value: doc.data().name
           });
         });
-        setTimeout(function() {
-          $('select').material_select();
-        });
       });
   }
   // Need to save details in firebase.
@@ -103,21 +100,7 @@ export default class AddCourse extends Vue {
             value: doc.data()
           });
         });
-        setTimeout(function() {
-          $('select').material_select();
-        });
       });
-  }
-  
-  mounted() {
-    $('#txtPublishedDate').pickadate({
-      selectMonths: true, // Creates a dropdown to control month
-      selectYears: 15, // Creates a dropdown of 15 years to control year,
-      today: 'Today',
-      clear: 'Clear',
-      close: 'Ok',
-      closeOnSelect: false // Close upon selecting a date,
-    });
   }
 }
 </script>

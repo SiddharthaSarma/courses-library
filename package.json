@@ -12,7 +12,8 @@
   "dependencies": {
     "firebase": "^4.8.0",
     "poi": "^9.6.1",
-    "vue-property-decorator": "^6.0.0"
+    "vue-property-decorator": "^6.0.0",
+    "vuetify": "^0.17.5"
   },
   "devDependencies": {
     "dotenv": "^4.0.0",

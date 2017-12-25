@@ -1,36 +1,42 @@
 <template>
-    <div>
-      <Header></Header>
-      {{msg}}
-      <button class="waves-effect waves-light btn" @click="onClick">change message</button>
-      
-      <div class="row">
-        <course />
-        <course />
-        <course />
-        <course />
-      </div>
-      <add-course></add-course>
-            
-    </div>
+  <v-app dark>
+		<v-toolbar class="teal darken-3">
+			<v-toolbar-title>Title</v-toolbar-title>
+			<v-spacer></v-spacer>
+			<v-toolbar-side-icon class="hidden-md-and-up"></v-toolbar-side-icon>
+			<v-toolbar-items class="hidden-sm-and-down">
+				<v-btn flat @click="toggleList(true)">List</v-btn>
+				<v-btn flat @click="toggleList(false)">create course</v-btn>
+			</v-toolbar-items>
+  	</v-toolbar>
+		<v-content>
+			<v-layout>
+				<v-flex v-show="showList">
+					<List />
+				</v-flex>
+				<v-flex class="pa-3" v-if="!showList">
+					<vform></vform>
+				</v-flex>
+		  </v-layout>
+	  </v-content>
+	</v-app>
 </template>
 
 <script>
 import Vue from 'vue';
 import db from './firebaseinit';
-import Header from './components/header';
-import Course from './components/course';
-import AddCourse from './components/add-course';
+import List from './components/list';
+import vform from './components/add-course';
 import { Component } from 'vue-property-decorator';
+import('./node_modules/vuetify/dist/vuetify.min.css')
 @Component({
   components: {
-    Header,
-    Course,
-    AddCourse
+    List,
+    vform
   }
 })
 export default class App extends Vue {
-  msg = 'Hi this is siddhartha';
+  showList = true;
   onClick() {
     this.msg = 'Hi! message is changed';
     db
@@ -45,31 +51,8 @@ export default class App extends Vue {
         console.error('Error adding document: ', error);
       });
   }
-  created() {
-    db
-      .collection('courses')
-      .get()
-      .then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-          console.log(doc.id, ' => ', doc.data());
-        });
-      });
-    db
-      .collection('languages')
-      .get()
-      .then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-          console.log(doc.id, ' => ', doc.data());
-        });
-      });
-    db
-      .collection('publisher')
-      .get()
-      .then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-          console.log(doc.id, ' => ', doc.data());
-        });
-      });
+  toggleList(val) {
+    this.showList = val;
   }
 }
 </script>

@@ -1,64 +1,76 @@
 <template>
-  <div class="row">
-    <form class="col s12">
-      <div class="row">
-        <div class="input-field col s6">
-          <input id="courseName" type="text" class="validate">
-          <label for="courseName">Course Name</label>
-        </div>
-        <div class="input-field col s6">
-          <select name="courseLanguage" id="ddlLanguage">
-            <option v-for="opt in languages" :value="opt.id" :key="opt.id">{{opt.value.name}}</option>
-          </select>
-          <label for="txtLanguage">Language</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="txtAutorName" type="text" class="validate">
-          <label for="txtAutorName">Author Name</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="txtCourseLink" type="text" class="validate">
-          <label for="txtCourseLink">Course Link</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="txtImageLink" type="text" class="validate">
-          <label for="txtImageLink">Image Link</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s6">
-          <select name="coursePublisher" id="ddlPublisher">
-            <option v-for="opt in publishers" :value="opt.id" :key="opt.id">{{opt.value.name}}</option>
-          </select>
-          <label for="coursePublisher">Publisher</label>
-        </div>
-        <div class="input-field col s6">
-          <input id="txtPublishedDate" type="text">
-          <label for="txtPublishedDate">Published Date</label>
-        </div>
-      </div>
-    </form>
-  </div>
+  <v-form v-model="valid" ref="form" lazy-validation>
+    <v-text-field
+      label="Course Name"
+      v-model="courseName"
+    ></v-text-field>
+    <v-text-field
+      label="Description"
+      v-model="courseDescription"
+    ></v-text-field>
+    <v-select
+      label="Language"
+      v-model="select"
+      :items="languages"
+      item-text="value"
+      single-line
+      item-value="id"
+      return-object
+    ></v-select>
+      <v-dialog
+        persistent
+        v-model="modal"
+        lazy
+        full-width
+        width="290px"
+      >
+        <v-text-field
+          slot="activator"
+          label="Picker in dialog"
+          v-model="date"
+          prepend-icon="event"
+          readonly
+        ></v-text-field>
+        <v-date-picker v-model="date" scrollable actions>
+          <template slot-scope="{ save, cancel }">
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn flat color="primary" @click="cancel">Cancel</v-btn>
+              <v-btn flat color="primary" @click="save">OK</v-btn>
+            </v-card-actions>
+          </template>
+        </v-date-picker>
+      </v-dialog>
+    <v-btn
+      @click="submit"
+      :disabled="!valid"
+    >
+      submit
+    </v-btn>
+    <v-btn @click="clear">clear</v-btn>
+  </v-form>
 </template>
 
 <script>
+
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import db from '../firebaseinit';
+
 @Component({})
 export default class AddCourse extends Vue {
   languages = [];
   publishers = [];
+  courseName = '';
+  date = null;
+  menu = false;
+  modal = false;
+
   created() {
     this.fetchLanguages();
     this.fetchPublishers();
   }
+
   fetchLanguages() {
     db
       .collection('languages')
@@ -67,7 +79,7 @@ export default class AddCourse extends Vue {
         querySnapshot.forEach(doc => {
           this.languages.push({
             id: doc.id,
-            value: doc.data()
+            value: doc.data().name
           });
         });
         setTimeout(function() {
@@ -75,6 +87,11 @@ export default class AddCourse extends Vue {
         });
       });
   }
+  // Need to save details in firebase.
+  submitForm() {
+    console.log(this.courseName, this.courseAuthor, this.courseLink, this.imageLink, this.coursePublisher, this.publishedDate);
+  }
+
   fetchPublishers() {
     db
       .collection('publisher')
@@ -91,6 +108,7 @@ export default class AddCourse extends Vue {
         });
       });
   }
+  
   mounted() {
     $('#txtPublishedDate').pickadate({
       selectMonths: true, // Creates a dropdown to control month

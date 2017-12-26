@@ -23,8 +23,8 @@
       submit
     </v-btn>
     <v-btn @click="clear">clear</v-btn>
-    <v-snackbar :timeout="5000" :top="true" :right="true" :color="'success'" v-model="snackbar">
-      Course created successfully
+    <v-snackbar :timeout="5000" :top="true" :right="true" :color="color" v-model="snackbar">
+      {{msg}}
     </v-snackbar>
   </v-form>
 </template>
@@ -50,6 +50,8 @@ export default class AddCourse extends Vue {
   menu = false;
   modal = false;
   snackbar = false;
+  color = '';
+  msg = '';
 
   created() {
     this.fetchLanguages();
@@ -85,7 +87,7 @@ export default class AddCourse extends Vue {
         publisher: this.coursePublisher.id
       })
       .then(() => {
-        this.snackbar = true;
+        this.showToastr('success', 'Course created successfully');
         this.clear();
       })
       .catch(function(error) {
@@ -96,6 +98,13 @@ export default class AddCourse extends Vue {
   // Clear form
   clear() {
     this.$refs.form.reset();
+  }
+
+  // Show toastr
+  showToastr(color, msg) {
+    this.color = color;
+    this.msg = msg;
+    this.snackbar = true;
   }
 
   // Fetch publishers

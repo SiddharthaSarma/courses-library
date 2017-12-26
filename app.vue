@@ -37,20 +37,6 @@ import('./node_modules/vuetify/dist/vuetify.min.css');
 })
 export default class App extends Vue {
   showList = true;
-  onClick() {
-    this.msg = 'Hi! message is changed';
-    db
-      .collection('languages')
-      .add({
-        name: 'C'
-      })
-      .then(function(docRef) {
-        console.log('Document written with ID: ', docRef.id);
-      })
-      .catch(function(error) {
-        console.error('Error adding document: ', error);
-      });
-  }
   toggleList(val) {
     this.showList = val;
   }

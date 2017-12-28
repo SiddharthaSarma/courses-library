@@ -12,6 +12,7 @@ if (fs.existsSync(envFile)) {
   }
 }
 module.exports = {
+  entry: './src/index.js',
   env: getEnvList()
 };
 

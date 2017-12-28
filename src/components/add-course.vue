@@ -1,6 +1,6 @@
 <template>
-  <v-form ref="form">
-    <v-text-field label="Course Name" v-model="courseName"></v-text-field>
+  <v-form ref="form" v-model="valid">
+    <v-text-field label="Course Name" v-model="courseName" :rules="nameRules" required></v-text-field>
     <v-text-field label="Description" v-model="courseDescription"></v-text-field>
     <v-text-field label="Author" v-model="courseAuthor"></v-text-field>
     <v-text-field label="Course Link" v-model="courseLink"></v-text-field>
@@ -19,9 +19,7 @@
         </template>
       </v-date-picker>
     </v-dialog>
-    <v-btn @click="submit">
-      submit
-    </v-btn>
+    <v-btn @click="submit" :disabled="!valid">submit</v-btn>
     <v-btn @click="clear">clear</v-btn>
     <v-snackbar :timeout="5000" :top="true" :right="true" :color="color" v-model="snackbar">
       {{msg}}
@@ -52,6 +50,12 @@ export default class AddCourse extends Vue {
   snackbar = false;
   color = '';
   msg = '';
+
+  // validation
+  valid = true;
+  nameRules = [
+    v => !!v || 'Course Name is required'
+  ];
 
   created() {
     this.fetchLanguages();

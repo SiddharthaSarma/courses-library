@@ -94,7 +94,8 @@ export default class AddCourse extends Vue {
         this.showToastr('success', 'Course created successfully');
         this.clear();
       })
-      .catch(function(error) {
+      .catch((error) => {
+        this.showToastr('error', 'Something went wrong. Please try again later.');
         console.error('Error writing document: ', error);
       });
   }

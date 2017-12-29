@@ -106,8 +106,8 @@ export default class AddCourse extends Vue {
   }
 
   // Show toastr
-  showToastr(color, msg) {
-    this.color = color;
+  showToastr(type, msg) {
+    this.color = type;
     this.msg = msg;
     this.snackbar = true;
   }

@@ -24,7 +24,6 @@
 
 <script>
 import Vue from 'vue';
-import db from './firebaseinit';
 import List from './components/list';
 import vform from './components/add-course';
 import { Component } from 'vue-property-decorator';

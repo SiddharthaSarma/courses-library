@@ -27,7 +27,7 @@
 <script>
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
-import db from '../firebaseinit';
+import db from '../firebase';
 
 @Component({})
 export default class List extends Vue {

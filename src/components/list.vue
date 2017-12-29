@@ -2,6 +2,9 @@
   <v-container fluid grid-list-md>
     <v-layout row wrap>
       <div class="spinner" v-if="loading"></div>
+      <v-flex xs12 v-if="!loading && !list.length">
+        <h1>There are no courses in library :(</h1>
+      </v-flex>
       <v-flex xs12 sm6 md3 v-for="course in list" :key="course.id">
         <v-card flat tile>
           <v-card-media :src="course.imageLink" height="150px">

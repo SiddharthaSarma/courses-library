@@ -9,6 +9,7 @@
         <v-btn flat @click="toggleList(false)">create course</v-btn>
       </v-toolbar-items>
     </v-toolbar>
+    <search></search>
     <v-content>
       <v-layout>
         <v-flex v-if="showList">
@@ -26,12 +27,14 @@
 import Vue from 'vue';
 import List from './components/list';
 import vform from './components/add-course';
+import search from './components/search';
 import { Component } from 'vue-property-decorator';
 import('../node_modules/vuetify/dist/vuetify.min.css');
 @Component({
   components: {
     List,
-    vform
+    vform,
+    search
   }
 })
 export default class App extends Vue {

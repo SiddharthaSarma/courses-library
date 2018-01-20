@@ -36,6 +36,7 @@ import EventBus from '../eventbus';
 @Component({})
 export default class List extends Vue {
   list = [];
+  originalList = [];
   loading = true;
 
   mounted() {
@@ -51,14 +52,18 @@ export default class List extends Vue {
       .then(querySnapshot => {
         this.loading = false;
         querySnapshot.forEach(doc => {
-          this.list.push(doc.data());
+          this.originalList.push(doc.data());
         });
+        this.searchCourses('');
       });
   }
 
   // search for the courses
+  // FIXME: Add search at the client side, need to implement at server side using Algolia
   searchCourses(search) {
-    console.log(search);
+    this.list = this.originalList.filter(course =>
+      course.name.toLowerCase().includes(search.toLowerCase())
+    );
   }
 }
 </script>

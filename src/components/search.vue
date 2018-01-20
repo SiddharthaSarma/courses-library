@@ -23,7 +23,7 @@ import { Component } from 'vue-property-decorator';
 
 @Component({})
 export default class Search extends Vue {
-  search = 'Hi there';
+  search = '';
 
   searchCourse() {
     EventBus.$emit('SEARCH_COURSE', { search: this.search });

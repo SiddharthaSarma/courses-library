@@ -31,11 +31,19 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import db from '../firebase';
+import EventBus from '../eventbus';
 
 @Component({})
 export default class List extends Vue {
   list = [];
   loading = true;
+
+  mounted() {
+    EventBus.$on('SEARCH_COURSE', payload => {
+      this.searchCourses(payload.search);
+    });
+  }
+
   created() {
     db
       .collection('courses')
@@ -46,6 +54,11 @@ export default class List extends Vue {
           this.list.push(doc.data());
         });
       });
+  }
+
+  // search for the courses
+  searchCourses(search) {
+    console.log(search);
   }
 }
 </script>

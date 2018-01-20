@@ -5,16 +5,16 @@
       <v-flex xs12 v-if="!loading && !list.length">
         <h1>There are no courses in library :(</h1>
       </v-flex>
-      <v-flex xs12 sm6 md3 v-for="course in list" :key="course.id">
+      <v-flex xs12 sm6 md2 v-for="course in list" :key="course.id">
         <v-card flat tile>
           <v-card-media :src="course.imageLink" height="150px">
           </v-card-media>
           <v-card-title primary-title>
             <div>
-              <h6 class="headline mb-0">
+              <h4 class="mb-0">
                 <a :href="course.link" target="_blank">{{course.name}}</a>
-              </h6>
-              <div class="course-description">{{course.description}}</div>
+              </h4>
+              <!-- <div class="course-description">{{course.description}}</div> -->
             </div>
           </v-card-title>
           <!-- <v-card-actions>

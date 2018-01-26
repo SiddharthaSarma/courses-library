@@ -14,7 +14,7 @@ if (fs.existsSync(envFile)) {
 module.exports = {
   entry: './src/index.js',
   html: {
-    template: './src/index.ejs',
+    template: './src/index.ejs'
   },
   env: getEnvList()
 };

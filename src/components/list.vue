@@ -2,10 +2,10 @@
   <v-container fluid grid-list-md>
     <v-layout row wrap>
       <div class="spinner" v-if="loading"></div>
-      <v-flex xs12 v-if="!loading && !list.length">
+      <v-flex xs12 v-if="!loading && !computedPages.length">
         <h1>There are no courses in library :(</h1>
       </v-flex>
-      <v-flex xs12 sm6 md2 v-for="course in list" :key="course.id">
+      <v-flex xs12 sm6 md2 v-for="course in computedPages" :key="course.id">
         <v-card flat tile>
           <v-card-media :src="course.imageLink" height="150px">
           </v-card-media>
@@ -24,6 +24,9 @@
         </v-card>
       </v-flex>
     </v-layout>
+    <div class="text-xs-center">
+       <v-pagination :length="pagesLength" v-model="page" v-if="!loading && pagesLength !==1" circle></v-pagination>
+    </div>
   </v-container>
 </template>
 
@@ -38,11 +41,18 @@ export default class List extends Vue {
   list = [];
   originalList = [];
   loading = true;
+  pagesLength = 1;
+  page = 1;
 
   mounted() {
     EventBus.$on('SEARCH_COURSE', payload => {
       this.searchCourses(payload.search);
     });
+  }
+
+  // computed
+  get computedPages() {
+    return this.list.slice((this.page - 1) * 12, this.page * 12);
   }
 
   created() {
@@ -55,6 +65,7 @@ export default class List extends Vue {
           this.originalList.push(doc.data());
         });
         this.searchCourses('');
+        this.calculatePages();
       });
   }
 
@@ -64,6 +75,12 @@ export default class List extends Vue {
     this.list = this.originalList.filter(course =>
       course.name.toLowerCase().includes(search.toLowerCase())
     );
+    this.calculatePages();
+  }
+
+  calculatePages() {
+    this.pagesLength = Math.ceil(this.list.length / 12);
+    this.page = 1;
   }
 }
 </script>

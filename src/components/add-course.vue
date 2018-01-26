@@ -1,6 +1,6 @@
 <template>
-  <v-form ref="form">
-    <v-text-field label="Course Name" v-model="courseName"></v-text-field>
+  <v-form ref="form" v-model="valid">
+    <v-text-field label="Course Name" v-model="courseName" :rules="nameRules" required></v-text-field>
     <v-text-field label="Description" v-model="courseDescription"></v-text-field>
     <v-text-field label="Author" v-model="courseAuthor"></v-text-field>
     <v-text-field label="Course Link" v-model="courseLink"></v-text-field>
@@ -19,12 +19,10 @@
         </template>
       </v-date-picker>
     </v-dialog>
-    <v-btn @click="submit">
-      submit
-    </v-btn>
+    <v-btn @click="submit" :disabled="!valid">submit</v-btn>
     <v-btn @click="clear">clear</v-btn>
-    <v-snackbar :timeout="5000" :top="true" :right="true" :color="'success'" v-model="snackbar">
-      Course created successfully
+    <v-snackbar :timeout="5000" :top="true" :right="true" :color="color" v-model="snackbar">
+      {{msg}}
     </v-snackbar>
   </v-form>
 </template>
@@ -32,7 +30,7 @@
 <script>
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
-import db from '../firebaseinit';
+import db from '../firebase';
 
 @Component({})
 export default class AddCourse extends Vue {
@@ -50,6 +48,14 @@ export default class AddCourse extends Vue {
   menu = false;
   modal = false;
   snackbar = false;
+  color = '';
+  msg = '';
+
+  // validation
+  valid = true;
+  nameRules = [
+    v => !!v || 'Course Name is required'
+  ];
 
   created() {
     this.fetchLanguages();
@@ -85,10 +91,11 @@ export default class AddCourse extends Vue {
         publisher: this.coursePublisher.id
       })
       .then(() => {
-        this.snackbar = true;
+        this.showToastr('success', 'Course created successfully');
         this.clear();
       })
-      .catch(function(error) {
+      .catch((error) => {
+        this.showToastr('error', 'Something went wrong. Please try again later.');
         console.error('Error writing document: ', error);
       });
   }
@@ -96,6 +103,13 @@ export default class AddCourse extends Vue {
   // Clear form
   clear() {
     this.$refs.form.reset();
+  }
+
+  // Show toastr
+  showToastr(type, msg) {
+    this.color = type;
+    this.msg = msg;
+    this.snackbar = true;
   }
 
   // Fetch publishers

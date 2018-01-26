@@ -1,5 +1,5 @@
 <template>
-  <v-content>
+  <v-content class="search-content">
     <v-layout>
       <v-flex>
         <div class="mb-3 input-group input-group--prepend-icon input-group--text-field input-group--single-line input-group--solo primary--text">
@@ -31,5 +31,7 @@ export default class Search extends Vue {
 </script>
 
 <style>
-
+.content--wrap.search-content {
+  flex: unset;
+}
 </style>

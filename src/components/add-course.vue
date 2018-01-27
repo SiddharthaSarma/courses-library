@@ -21,7 +21,7 @@
     </v-dialog>
     <v-btn @click="submit" :disabled="!valid">submit</v-btn>
     <v-btn @click="clear">clear</v-btn>
-    <v-snackbar :timeout="5000" :top="true" :right="true" :color="color" v-model="snackbar">
+    <v-snackbar :timeout="5000" :bottom="true" :right="true" :color="color" v-model="snackbar">
       {{msg}}
     </v-snackbar>
   </v-form>
@@ -53,9 +53,7 @@ export default class AddCourse extends Vue {
 
   // validation
   valid = true;
-  nameRules = [
-    v => !!v || 'Course Name is required'
-  ];
+  nameRules = [v => !!v || 'Course Name is required'];
 
   created() {
     this.fetchLanguages();
@@ -94,8 +92,11 @@ export default class AddCourse extends Vue {
         this.showToastr('success', 'Course created successfully');
         this.clear();
       })
-      .catch((error) => {
-        this.showToastr('error', 'Something went wrong. Please try again later.');
+      .catch(error => {
+        this.showToastr(
+          'error',
+          'Something went wrong. Please try again later.'
+        );
         console.error('Error writing document: ', error);
       });
   }

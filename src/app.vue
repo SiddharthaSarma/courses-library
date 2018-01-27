@@ -9,7 +9,7 @@
         <v-btn flat @click="toggleList(false)">create course</v-btn>
       </v-toolbar-items>
     </v-toolbar>
-    <search v-show="showList"></search>
+    <search v-if="showList"></search>
     <v-content>
       <v-layout>
         <v-flex v-if="showList">

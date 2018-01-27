@@ -3,7 +3,6 @@
     <v-layout>
       <v-flex>
         <div class="mb-3 input-group input-group--prepend-icon input-group--text-field input-group--single-line input-group--solo primary--text">
-          <label>Search</label>
           <div class="input-group__input">
             <i aria-hidden="true" class="material-icons icon input-group__prepend-icon">filter_list</i>
             <input tabindex="0" placeholder="Search" type="text" v-model="search" v-on:change="searchCourse">

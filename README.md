@@ -10,7 +10,7 @@ npm install
 
 #### How to configure?
 
-Create from .env from .env-default and change the default settings to your firebase project settings.
+Create `.env` from `.env-default` file and change default settings to your firebase project settings.
 
 #### To run the server
 

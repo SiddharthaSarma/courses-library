@@ -101,4 +101,7 @@ export default class List extends Vue {
   top: 50%;
   width: 200px;
 }
+button {
+  outline: none;
+}
 </style>

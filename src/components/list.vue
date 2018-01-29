@@ -5,11 +5,11 @@
       <v-flex xs12 v-if="!loading && !computedPages.length">
         <h1>There are no courses in library :(</h1>
       </v-flex>
-      <v-flex xs12 sm6 md2 v-for="course in computedPages" :key="course.id">
+      <v-flex xs12 sm6 md2 class="course-card" v-for="course in computedPages" :key="course.id">
         <v-card flat tile>
           <v-card-media :src="course.imageLink" height="150px">
           </v-card-media>
-          <v-card-title primary-title>
+          <v-card-title primary-title class="cyan lighten-3">
             <div>
               <h4 class="mb-0">
                 <a :href="course.link" target="_blank">{{course.name}}</a>
@@ -17,7 +17,7 @@
               <!-- <div class="course-description">{{course.description}}</div> -->
             </div>
           </v-card-title>
-          <v-card-actions>
+          <v-card-actions class="cyan lighten-3">
             <v-btn flat color="orange">View</v-btn>
             <!-- <v-btn flat color="orange">Explore</v-btn> -->
           </v-card-actions>
@@ -106,5 +106,14 @@ button {
 }
 h4.mb-0 {
   min-height: 42px;
+  max-height: 42px;
+  overflow: hidden;
+}
+.course-card {
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+.application a {
+  color: #303030;
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
-  <v-content class="search-content">
+  <v-content dark class="search-content">
     <v-layout>
       <v-flex>
-        <div class="mb-3 input-group input-group--prepend-icon input-group--text-field input-group--single-line input-group--solo primary--text">
+        <div class="mb-3 input-group input-group--prepend-icon input-group--text-field input-group--single-line input-group--solo">
           <div class="input-group__input">
             <i aria-hidden="true" class="material-icons icon input-group__prepend-icon">search</i>
             <input tabindex="0" placeholder="Search" type="text" v-model="search" v-on:keyup="searchCourse">
@@ -32,5 +32,8 @@ export default class Search extends Vue {
 <style>
 .content--wrap.search-content {
   flex: unset;
+}
+div.input-group.input-group--solo {
+  background: #303030;
 }
 </style>

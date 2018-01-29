@@ -1,6 +1,6 @@
 <template>
-  <v-app light>
-    <v-toolbar dark class="primary">
+  <v-app dark>
+    <v-toolbar class="primary">
       <v-toolbar-title>Courses library</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-side-icon class="hidden-md-and-up"></v-toolbar-side-icon>

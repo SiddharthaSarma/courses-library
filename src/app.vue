@@ -14,6 +14,7 @@
       <v-layout>
         <v-flex v-if="showList">
           <List />
+          <!-- <view-course /> -->
         </v-flex>
         <v-flex class="pa-3" v-if="!showList">
           <vform></vform>
@@ -28,13 +29,15 @@ import Vue from 'vue';
 import List from './components/list';
 import vform from './components/add-course';
 import search from './components/search';
+import ViewCourse from './components/view-course';
 import { Component } from 'vue-property-decorator';
 import('../node_modules/vuetify/dist/vuetify.min.css');
 @Component({
   components: {
     List,
     vform,
-    search
+    search,
+    ViewCourse
   }
 })
 export default class App extends Vue {

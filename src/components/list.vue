@@ -17,10 +17,10 @@
               <!-- <div class="course-description">{{course.description}}</div> -->
             </div>
           </v-card-title>
-          <!-- <v-card-actions>
-            <v-btn flat color="orange">Share</v-btn>
-            <v-btn flat color="orange">Explore</v-btn>
-          </v-card-actions> -->
+          <v-card-actions>
+            <v-btn flat color="orange">View</v-btn>
+            <!-- <v-btn flat color="orange">Explore</v-btn> -->
+          </v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>

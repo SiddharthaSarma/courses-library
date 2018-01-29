@@ -104,4 +104,7 @@ export default class List extends Vue {
 button {
   outline: none;
 }
+h4.mb-0 {
+  min-height: 42px;
+}
 </style>

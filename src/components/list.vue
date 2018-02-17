@@ -9,7 +9,7 @@
         <v-card flat tile>
           <v-card-media :src="course.imageLink" height="150px">
           </v-card-media>
-          <v-card-title primary-title class="cyan lighten-3">
+          <v-card-title primary-title class="white">
             <div>
               <h4 class="mb-0">
                 <a :href="course.link" target="_blank">{{course.name}}</a>
@@ -17,8 +17,8 @@
               <!-- <div class="course-description">{{course.description}}</div> -->
             </div>
           </v-card-title>
-          <v-card-actions class="cyan lighten-3">
-            <v-btn flat color="orange">View</v-btn>
+          <v-card-actions class="white">
+            <v-btn flat color="purple darken-4">View</v-btn>
             <!-- <v-btn flat color="orange">Explore</v-btn> -->
           </v-card-actions>
         </v-card>

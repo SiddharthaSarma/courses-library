@@ -12,13 +12,17 @@
     <search v-if="showList"></search>
     <v-content>
       <v-layout>
-        <v-flex v-if="showList">
-          <List />
-          <!-- <view-course /> -->
-        </v-flex>
-        <v-flex class="pa-3" v-if="!showList">
-          <vform></vform>
-        </v-flex>
+        <transition name="fade">
+          <v-flex v-if="showList">
+            <List />
+            <!-- <view-course /> -->
+          </v-flex>
+        </transition>
+        <transition name="fade">
+          <v-flex class="pa-3" v-if="!showList">
+            <vform></vform>
+          </v-flex>
+        </transition>
       </v-layout>
     </v-content>
   </v-app>
@@ -47,3 +51,12 @@ export default class App extends Vue {
   }
 }
 </script>
+<style>
+.fade-enter-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

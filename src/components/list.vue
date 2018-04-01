@@ -52,6 +52,7 @@ export default class List extends Vue {
 
   // computed
   get computedPages() {
+    window.scrollTo(0, 0);
     return this.list.slice((this.page - 1) * 12, this.page * 12);
   }
 

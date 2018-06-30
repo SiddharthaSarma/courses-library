@@ -1,7 +1,9 @@
 <template>
   <v-content dark class="search-content">
     <v-layout>
-      <v-flex>
+      <v-flex xs8>
+      </v-flex>
+      <v-flex xs4>
         <div class="mb-3 input-group input-group--prepend-icon input-group--text-field input-group--single-line input-group--solo">
           <div class="input-group__input">
             <i aria-hidden="true" class="material-icons icon input-group__prepend-icon">search</i>

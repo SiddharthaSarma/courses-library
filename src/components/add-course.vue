@@ -1,15 +1,63 @@
 <template>
   <v-form ref="form" v-model="valid">
-    <v-text-field label="Course Name" v-model="courseName" :rules="nameRules" required></v-text-field>
-    <v-text-field label="Description" v-model="courseDescription"></v-text-field>
-    <v-text-field label="Author" v-model="courseAuthor"></v-text-field>
-    <v-text-field label="Course Link" v-model="courseLink"></v-text-field>
-    <v-text-field label="Image Link" v-model="imageLink"></v-text-field>
-    <v-select label="Publisher" v-model="coursePublisher" :items="publishers" item-text="value" single-line item-value="id" return-object></v-select>
-    <v-select label="Language" v-model="courseLanguage" :items="languages" item-text="value" single-line item-value="id" return-object></v-select>
-    <v-dialog persistent v-model="modal" lazy full-width width="290px">
-      <v-text-field slot="activator" label="Released on" v-model="publishedDate" prepend-icon="event" readonly></v-text-field>
-      <v-date-picker v-model="publishedDate" scrollable actions>
+    <v-text-field
+      label="Course Name"
+      v-model="courseName"
+      :rules="nameRules"
+      required
+    ></v-text-field>
+    <v-text-field
+      label="Description"
+      v-model="courseDescription"
+    ></v-text-field>
+    <v-text-field
+      label="Author"
+      v-model="courseAuthor"
+    ></v-text-field>
+    <v-text-field
+      label="Course Link"
+      v-model="courseLink"
+    ></v-text-field>
+    <v-text-field
+      label="Image Link"
+      v-model="imageLink"
+    ></v-text-field>
+    <v-select
+      label="Publisher"
+      v-model="coursePublisher"
+      :items="publishers"
+      item-text="value"
+      single-line item-value="id"
+      return-object
+    ></v-select>
+    <v-select
+      label="Language"
+      v-model="courseLanguage"
+      :items="languages" i
+      tem-text="value"
+      single-line
+      item-value="id"
+      return-object
+    ></v-select>
+    <v-dialog
+      persistent
+      v-model="modal"
+      lazy
+      full-width
+      width="290px"
+    >
+      <v-text-field
+        slot="activator"
+        label="Released on"
+        v-model="publishedDate"
+        prepend-icon="event"
+        readonly
+      ></v-text-field>
+      <v-date-picker
+        v-model="publishedDate"
+        scrollable
+        actions
+      >
         <template slot-scope="{ save, cancel }">
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -21,8 +69,13 @@
     </v-dialog>
     <v-btn @click="submit" :disabled="!valid">submit</v-btn>
     <v-btn @click="clear">clear</v-btn>
-    <v-snackbar :timeout="5000" :bottom="true" :right="true" :color="color" v-model="snackbar">
-      {{msg}}
+    <v-snackbar
+      :timeout="5000"
+      :bottom="true"
+      :right="true"
+      :color="color"
+      v-model="snackbar"
+    > {{msg}}
     </v-snackbar>
   </v-form>
 </template>
@@ -74,7 +127,7 @@ export default class AddCourse extends Vue {
         });
       });
   }
-  // Need to save details in firebase.
+  // Save details in firebase
   submit() {
     db
       .collection('courses')

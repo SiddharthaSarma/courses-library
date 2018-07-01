@@ -15,7 +15,8 @@
                     prepend-icon="person"
                     name="login"
                     label="Login"
-                    type="text"
+                    type="email"
+                    v-model="email"
                   ></v-text-field>
                   <v-text-field
                     prepend-icon="lock"
@@ -23,6 +24,7 @@
                     label="Password"
                     id="password"
                     type="password"
+                    v-model="password"
                   ></v-text-field>
                 </v-form>
               </v-card-text>
@@ -39,11 +41,25 @@
 </template>
 
 <script>
-export default {
-  methods: {
-    login() {
-      this.$router.push('/library')
-    }
+import Vue from 'vue';
+import { Component } from 'vue-property-decorator';
+import EventBus from '../eventbus.js';
+import firebase from 'firebase'
+
+@Component({})
+export default class SignIn extends Vue {
+  email = '';
+  password = '';
+
+  login() {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(this.email, this.password)
+      .then(user => {
+        EventBus.user = user;
+        this.$router.push('/library');
+      })
+      .catch(err => console.log(err));
   }
-};
+}
 </script>

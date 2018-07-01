@@ -3,7 +3,9 @@
     <v-layout row wrap>
       <div class="spinner" v-if="loading"></div>
       <v-flex xs12 v-if="!loading && !computedPages.length">
-        <h1>There are no courses in library :(</h1>
+        <h1 class="text-xs-center">
+          There are no courses matching with search text :( Try different search.
+        </h1>
       </v-flex>
       <v-flex xs12 sm6 md2 class="course-card" v-for="course in computedPages" :key="course.id">
         <v-card flat tile>

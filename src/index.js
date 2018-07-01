@@ -1,6 +1,13 @@
 import Vue from 'vue';
-import App from './app.vue';
+import Routes from './routes.vue';
 import Vuetify from 'vuetify';
+import VueRouter from 'vue-router';
+import { routes } from './routes-config';
+
+Vue.use(VueRouter);
+const router = new VueRouter({
+  routes
+});
 
 Vue.use(Vuetify, {
   theme: {
@@ -12,5 +19,6 @@ Vue.use(Vuetify, {
 });
 new Vue({
   el: '#app',
-  render: h => h(App)
+  router,
+  render: h => h(Routes)
 });

@@ -1,5 +1,7 @@
 import App from './app.vue';
 import SignIn from './components/signin';
+import AddCourse from './components/add-course';
+import CourseDetails from './components/view-course';
 import EventBus from './eventbus.js';
 
 export const routes = [
@@ -8,7 +10,7 @@ export const routes = [
     component: SignIn,
     beforeEnter: (to, from, next) => {
       if (EventBus.user) {
-        next({ path: '/library'});
+        next({ path: '/library' });
       } else {
         next();
       }
@@ -25,7 +27,20 @@ export const routes = [
       }
     }
   },
+  {
+    path: '/add',
+    component: AddCourse,
+    beforeEnter: (to, from, next) => {
+      if (EventBus.user) {
+        next();
+      } else {
+        next({ path: '/signin' });
+      }
+    }
+  },
+  {
+    path: '/details',
+    component: CourseDetails
+  },
   { path: '*', redirect: '/signin' }
 ];
-
-

@@ -1,28 +1,12 @@
 <template>
   <v-app dark>
-    <v-toolbar class="primary">
-      <v-toolbar-title>Courses library</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-toolbar-side-icon class="hidden-md-and-up"></v-toolbar-side-icon>
-      <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn flat @click="toggleList(true)">List</v-btn>
-        <v-btn flat @click="toggleList(false)">create course</v-btn>
-      </v-toolbar-items>
-    </v-toolbar>
-    <search v-if="showList"></search>
+    <navbar></navbar>
+    <search></search>
     <v-content>
       <v-layout>
-        <transition name="fade">
-          <v-flex v-if="showList">
-            <List />
-            <!-- <view-course /> -->
-          </v-flex>
-        </transition>
-        <transition name="fade">
-          <v-flex class="pa-3" v-if="!showList">
-            <vform></vform>
-          </v-flex>
-        </transition>
+        <v-flex>
+          <List />
+        </v-flex>
       </v-layout>
     </v-content>
   </v-app>
@@ -33,6 +17,7 @@ import Vue from 'vue';
 import List from './components/list';
 import vform from './components/add-course';
 import search from './components/search';
+import Navbar from './components/navbar';
 import ViewCourse from './components/view-course';
 import { Component } from 'vue-property-decorator';
 import('../node_modules/vuetify/dist/vuetify.min.css');
@@ -41,15 +26,11 @@ import('../node_modules/vuetify/dist/vuetify.min.css');
     List,
     vform,
     search,
+    Navbar,
     ViewCourse
   }
 })
-export default class App extends Vue {
-  showList = true;
-  toggleList(val) {
-    this.showList = val;
-  }
-}
+export default class App extends Vue {}
 </script>
 <style>
 .fade-enter-active {

@@ -7,14 +7,7 @@ import EventBus from './eventbus.js';
 export const routes = [
   {
     path: '/signin',
-    component: SignIn,
-    beforeEnter: (to, from, next) => {
-      if (EventBus.user) {
-        next({ path: '/library' });
-      } else {
-        next();
-      }
-    }
+    component: SignIn
   },
   {
     path: '/library',

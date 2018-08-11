@@ -50,7 +50,13 @@ import firebase from 'firebase'
 export default class SignIn extends Vue {
   email = '';
   password = '';
-
+  beforeEnter(to, from, next) {
+    if (EventBus.user) {
+      next({ path: '/library' });
+    } else {
+      next();
+    }
+  }
   login() {
     firebase
       .auth()

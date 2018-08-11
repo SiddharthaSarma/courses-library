@@ -10,7 +10,7 @@
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
-                <v-form>
+                <v-form @keyup.native.enter="login">
                   <v-text-field
                     prepend-icon="person"
                     name="login"

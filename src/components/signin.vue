@@ -44,19 +44,13 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import EventBus from '../eventbus.js';
-import firebase from 'firebase'
+import firebase from 'firebase';
 
 @Component({})
 export default class SignIn extends Vue {
   email = '';
   password = '';
-  beforeEnter(to, from, next) {
-    if (EventBus.user) {
-      next({ path: '/library' });
-    } else {
-      next();
-    }
-  }
+
   login() {
     firebase
       .auth()

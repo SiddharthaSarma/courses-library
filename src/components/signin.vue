@@ -6,7 +6,7 @@
           <v-flex xs12 sm8 md4>
             <v-card class="elevation-12">
               <v-toolbar dark color="primary">
-                <v-toolbar-title>Login form</v-toolbar-title>
+                <v-toolbar-title>Login</v-toolbar-title>
                 <v-spacer></v-spacer>
               </v-toolbar>
               <v-card-text>
@@ -14,7 +14,7 @@
                   <v-text-field
                     prepend-icon="person"
                     name="login"
-                    label="Login"
+                    label="Email"
                     type="email"
                     v-model="email"
                   ></v-text-field>
@@ -56,7 +56,7 @@ export default class SignIn extends Vue {
       .auth()
       .signInWithEmailAndPassword(this.email, this.password)
       .then(user => {
-        EventBus.user = user;
+        EventBus.saveLoginDetails(user.refreshToken);
         this.$router.push('/library');
       })
       .catch(err => console.log(err));

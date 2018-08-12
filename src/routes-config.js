@@ -9,7 +9,7 @@ export const routes = [
     path: '/signin',
     component: SignIn,
     beforeEnter: (to, from, next) => {
-      if (EventBus.user) {
+      if (EventBus.isUserLoggedIn()) {
         next({ path: '/library' });
       } else {
         next();
@@ -20,7 +20,7 @@ export const routes = [
     path: '/library',
     component: App,
     beforeEnter: (to, from, next) => {
-      if (EventBus.user) {
+      if (EventBus.isUserLoggedIn()) {
         next();
       } else {
         next({ path: '/signin' });
@@ -31,7 +31,7 @@ export const routes = [
     path: '/add',
     component: AddCourse,
     beforeEnter: (to, from, next) => {
-      if (EventBus.user) {
+      if (EventBus.isUserLoggedIn()) {
         next();
       } else {
         next({ path: '/signin' });

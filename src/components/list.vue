@@ -27,7 +27,12 @@
       </v-flex>
     </v-layout>
     <div class="text-xs-center">
-       <v-pagination :length="pagesLength" v-model="page" v-if="!loading && pagesLength !==1 && computedPages.length !== 0" circle></v-pagination>
+       <v-pagination
+        :length="pagesLength"
+        v-model="page"
+        v-if="!loading && pagesLength !==1 && computedPages.length !== 0"
+        circle>
+      </v-pagination>
     </div>
   </v-container>
 </template>

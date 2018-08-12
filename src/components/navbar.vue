@@ -6,6 +6,7 @@
     <v-toolbar-items class="hidden-sm-and-down">
       <v-btn flat @click="navigateTo('library')">List</v-btn>
       <v-btn flat @click="navigateTo('add')">create course</v-btn>
+      <sign-out></sign-out>
     </v-toolbar-items>
   </v-toolbar>
 </template>
@@ -13,7 +14,14 @@
 <script>
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
-@Component({})
+import EventBus from '../eventbus';
+import SignOut from './signout.vue';
+
+@Component({
+  components: {
+    SignOut
+  }
+})
 export default class Navbar extends Vue {
   navigateTo(path) {
     this.$router.push(path);

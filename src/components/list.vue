@@ -9,7 +9,7 @@
       </v-flex>
       <v-flex xs12 sm6 md2 class="course-card" v-for="course in computedPages" :key="course.id">
         <v-card flat tile>
-          <v-card-media :src="course.imageLink" height="150px"></v-card-media>
+          <v-img :src="course.imageLink" height="150px"></v-img>
           <v-card-title primary-title class="white">
             <div>
               <h4 class="mb-0">

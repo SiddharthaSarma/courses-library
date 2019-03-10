@@ -1,19 +1,31 @@
 # courses-library
 
-A vue js courses library using firestore and webpack-poi
-
-#### Installing the packages
+## Project setup
 
 ```
-npm install
+yarn install
 ```
 
-#### How to configure?
-
-Create `.env` from `.env-default` file and change default settings to your firebase project settings.
-
-#### To run the server
+### Compiles and hot-reloads for development
 
 ```
-npm start
+yarn run serve
+```
+
+### Compiles and minifies for production
+
+```
+yarn run build
+```
+
+### Run your tests
+
+```
+yarn run test
+```
+
+### Lints and fixes files
+
+```
+yarn run lint
 ```

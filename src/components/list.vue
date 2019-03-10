@@ -3,14 +3,13 @@
     <v-layout row wrap>
       <div class="spinner" v-if="loading"></div>
       <v-flex xs12 v-if="!loading && !computedPages.length">
-        <h1 class="text-xs-center">
-          There are no courses matching with search text :( Try different search.
-        </h1>
+        <h1
+          class="text-xs-center"
+        >There are no courses matching with search text :( Try different search.</h1>
       </v-flex>
       <v-flex xs12 sm6 md2 class="course-card" v-for="course in computedPages" :key="course.id">
         <v-card flat tile>
-          <v-card-media :src="course.imageLink" height="150px">
-          </v-card-media>
+          <v-card-media :src="course.imageLink" height="150px"></v-card-media>
           <v-card-title primary-title class="white">
             <div>
               <h4 class="mb-0">
@@ -27,21 +26,21 @@
       </v-flex>
     </v-layout>
     <div class="text-xs-center">
-       <v-pagination
+      <v-pagination
         :length="pagesLength"
         v-model="page"
         v-if="!loading && pagesLength !==1 && computedPages.length !== 0"
-        circle>
-      </v-pagination>
+        circle
+      ></v-pagination>
     </div>
   </v-container>
 </template>
 
 <script>
-import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
-import db from '../firebase';
-import EventBus from '../eventbus';
+import Vue from "vue";
+import { Component } from "vue-property-decorator";
+import db from "../firebase";
+import EventBus from "../eventbus";
 
 @Component({})
 export default class List extends Vue {
@@ -52,7 +51,7 @@ export default class List extends Vue {
   page = 1;
 
   mounted() {
-    EventBus.$on('SEARCH_COURSE', payload => {
+    EventBus.$on("SEARCH_COURSE", payload => {
       this.searchCourses(payload.search);
     });
   }
@@ -64,15 +63,14 @@ export default class List extends Vue {
   }
 
   created() {
-    db
-      .collection('courses')
+    db.collection("courses")
       .get()
       .then(querySnapshot => {
         this.loading = false;
         querySnapshot.forEach(doc => {
           this.originalList.push(doc.data());
         });
-        this.searchCourses('');
+        this.searchCourses("");
         this.calculatePages();
       });
   }
@@ -99,7 +97,7 @@ export default class List extends Vue {
   overflow: hidden;
 }
 .spinner {
-  background-image: url(../../assets/preloader.gif);
+  /* background-image: url(../../assets/preloader.gif); */
   background-position: center;
   background-repeat: no-repeat;
   height: 200px;

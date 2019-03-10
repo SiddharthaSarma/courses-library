@@ -41,3 +41,4 @@ export default class App extends Vue {}
   opacity: 0;
 }
 </style>
+

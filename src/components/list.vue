@@ -97,7 +97,7 @@ export default class List extends Vue {
   overflow: hidden;
 }
 .spinner {
-  /* background-image: url(../../assets/preloader.gif); */
+  background-image: url(../assets/preloader.gif);
   background-position: center;
   background-repeat: no-repeat;
   height: 200px;

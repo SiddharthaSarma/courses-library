@@ -2,7 +2,6 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Vuetify from 'vuetify';
 import { routes } from './router';
-import Routes from './routes.vue';
 
 Vue.use(VueRouter);
 const router = new VueRouter({
@@ -19,7 +18,6 @@ Vue.use(Vuetify, {
   }
 });
 new Vue({
-  el: '#app',
   router,
-  render: h => h(Routes)
+  render: h => h('#app')
 });

@@ -14,11 +14,11 @@
 
 <script>
 import Vue from 'vue';
-import List from './components/list';
-import vform from './components/add-course';
-import search from './components/search';
-import Navbar from './components/navbar';
-import ViewCourse from './components/view-course';
+import List from './components/List';
+import vform from './components/AddCourse';
+import search from './components/Search';
+import Navbar from './components/Navbar';
+import ViewCourse from './components/ViewCourse';
 import { Component } from 'vue-property-decorator';
 import('../node_modules/vuetify/dist/vuetify.min.css');
 @Component({

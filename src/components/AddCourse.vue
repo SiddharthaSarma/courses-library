@@ -1,56 +1,35 @@
 <template>
-<v-app dark>
+  <v-app dark>
     <navbar></navbar>
     <v-content>
       <v-layout>
         <v-flex class="pa-2">
           <v-form ref="form" v-model="valid">
-            <v-text-field
-              label="Course Name"
-              v-model="courseName"
-              :rules="nameRules"
-              required
-            ></v-text-field>
-            <v-text-field
-              label="Description"
-              v-model="courseDescription"
-            ></v-text-field>
-            <v-text-field
-              label="Author"
-              v-model="courseAuthor"
-            ></v-text-field>
-            <v-text-field
-              label="Course Link"
-              v-model="courseLink"
-            ></v-text-field>
-            <v-text-field
-              label="Image Link"
-              v-model="imageLink"
-            ></v-text-field>
+            <v-text-field label="Course Name" v-model="courseName" :rules="nameRules" required></v-text-field>
+            <v-text-field label="Description" v-model="courseDescription"></v-text-field>
+            <v-text-field label="Author" v-model="courseAuthor"></v-text-field>
+            <v-text-field label="Course Link" v-model="courseLink"></v-text-field>
+            <v-text-field label="Image Link" v-model="imageLink"></v-text-field>
             <v-select
               label="Publisher"
               v-model="coursePublisher"
               :items="publishers"
               item-text="value"
-              single-line item-value="id"
+              single-line
+              item-value="id"
               return-object
             ></v-select>
             <v-select
               label="Language"
               v-model="courseLanguage"
-              :items="languages" i
+              :items="languages"
+              i
               tem-text="value"
               single-line
               item-value="id"
               return-object
             ></v-select>
-            <v-dialog
-              persistent
-              v-model="modal"
-              lazy
-              full-width
-              width="290px"
-            >
+            <v-dialog persistent v-model="modal" lazy full-width width="290px">
               <v-text-field
                 slot="activator"
                 label="Released on"
@@ -58,11 +37,7 @@
                 prepend-icon="event"
                 readonly
               ></v-text-field>
-              <v-date-picker
-                v-model="publishedDate"
-                scrollable
-                actions
-              >
+              <v-date-picker v-model="publishedDate" scrollable actions>
                 <template slot-scope="{ save, cancel }">
                   <v-card-actions>
                     <v-spacer></v-spacer>
@@ -80,20 +55,19 @@
               :right="true"
               :color="color"
               v-model="snackbar"
-            > {{msg}}
-            </v-snackbar>
+            >{{msg}}</v-snackbar>
           </v-form>
         </v-flex>
       </v-layout>
     </v-content>
-</v-app>
+  </v-app>
 </template>
 
 <script>
-import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
-import Navbar from './navbar';
-import db from '../firebase';
+import Vue from "vue";
+import { Component } from "vue-property-decorator";
+import Navbar from "./Navbar";
+import db from "../firebase";
 
 @Component({
   components: {
@@ -103,11 +77,11 @@ import db from '../firebase';
 export default class AddCourse extends Vue {
   languages = [];
   publishers = [];
-  courseLink = '';
-  courseName = '';
-  courseAuthor = '';
-  imageLink = '';
-  courseDescription = '';
+  courseLink = "";
+  courseName = "";
+  courseAuthor = "";
+  imageLink = "";
+  courseDescription = "";
   courseLanguage = null;
   coursePublisher = null;
   publishedDate = null;
@@ -115,12 +89,12 @@ export default class AddCourse extends Vue {
   menu = false;
   modal = false;
   snackbar = false;
-  color = '';
-  msg = '';
+  color = "";
+  msg = "";
 
   // validation
   valid = true;
-  nameRules = [v => !!v || 'Course Name is required'];
+  nameRules = [v => !!v || "Course Name is required"];
 
   created() {
     this.fetchLanguages();
@@ -129,8 +103,7 @@ export default class AddCourse extends Vue {
 
   // Fetch languages
   fetchLanguages() {
-    db
-      .collection('languages')
+    db.collection("languages")
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
@@ -143,8 +116,7 @@ export default class AddCourse extends Vue {
   }
   // Save details in firebase
   submit() {
-    db
-      .collection('courses')
+    db.collection("courses")
       .add({
         name: this.courseName,
         released_year: this.publishedDate,
@@ -156,15 +128,15 @@ export default class AddCourse extends Vue {
         publisher: this.coursePublisher.id
       })
       .then(() => {
-        this.showToastr('success', 'Course created successfully');
+        this.showToastr("success", "Course created successfully");
         this.clear();
       })
       .catch(error => {
         this.showToastr(
-          'error',
-          'Something went wrong. Please try again later.'
+          "error",
+          "Something went wrong. Please try again later."
         );
-        console.error('Error writing document: ', error);
+        console.error("Error writing document: ", error);
       });
   }
 
@@ -182,8 +154,7 @@ export default class AddCourse extends Vue {
 
   // Fetch publishers
   fetchPublishers() {
-    db
-      .collection('publisher')
+    db.collection("publisher")
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {

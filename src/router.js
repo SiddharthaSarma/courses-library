@@ -1,7 +1,7 @@
 import App from './App.vue';
-import AddCourse from './components/add-course';
-import SignIn from './components/signin';
-import CourseDetails from './components/view-course';
+import AddCourse from './components/AddCourse';
+import SignIn from './components/Signin';
+import CourseDetails from './components/ViewCourse';
 import EventBus from './eventbus.js';
 
 export const routes = [

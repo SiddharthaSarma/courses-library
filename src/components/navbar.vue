@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import Vue from 'vue';
-import { Component } from 'vue-property-decorator';
-import EventBus from '../eventbus';
-import SignOut from './signout.vue';
+import Vue from "vue";
+import { Component } from "vue-property-decorator";
+import EventBus from "../eventbus";
+import SignOut from "./Signout.vue";
 
 @Component({
   components: {

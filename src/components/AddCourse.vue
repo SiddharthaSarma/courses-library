@@ -29,7 +29,7 @@
               item-value="id"
               return-object
             ></v-select>
-            <v-dialog persistent v-model="modal" lazy full-width width="290px">
+            <v-dialog ref="dialog" persistent v-model="modal" lazy full-width width="290px">
               <v-text-field
                 slot="activator"
                 label="Released on"
@@ -38,13 +38,9 @@
                 readonly
               ></v-text-field>
               <v-date-picker v-model="publishedDate" scrollable actions>
-                <template slot-scope="{ save, cancel }">
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn flat color="primary" @click="cancel">Cancel</v-btn>
-                    <v-btn flat color="primary" @click="save">OK</v-btn>
-                  </v-card-actions>
-                </template>
+                <v-spacer></v-spacer>
+                <v-btn flat color="primary" @click="modal = false">Cancel</v-btn>
+                <v-btn flat color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
               </v-date-picker>
             </v-dialog>
             <v-btn @click="submit" :disabled="!valid">submit</v-btn>

@@ -1,9 +1,8 @@
-import App from './App.vue';
+import App from './App';
 import AddCourse from './components/AddCourse';
 import SignIn from './components/Signin';
 import CourseDetails from './components/ViewCourse';
 import EventBus from './eventbus.js';
-
 export const routes = [
   {
     path: '/signin',

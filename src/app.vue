@@ -20,7 +20,7 @@ import search from './components/Search';
 import Navbar from './components/Navbar';
 import ViewCourse from './components/ViewCourse';
 import { Component } from 'vue-property-decorator';
-import('../node_modules/vuetify/dist/vuetify.min.css');
+
 @Component({
   components: {
     List,

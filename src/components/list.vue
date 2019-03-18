@@ -19,7 +19,7 @@
             </div>
           </v-card-title>
           <v-card-actions class="white">
-            <v-btn flat color="purple darken-4">View</v-btn>
+            <v-btn flat color="purple darken-4" @click="$router.push('details')">View</v-btn>
             <!-- <v-btn flat color="orange">Explore</v-btn> -->
           </v-card-actions>
         </v-card>
